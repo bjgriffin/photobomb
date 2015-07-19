@@ -7,19 +7,22 @@
 //
 
 import UIKit
+import Bolts
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
+        Parse.enableLocalDatastore()
+        
+        // Initialize Parse.
+        Parse.setApplicationId("Nq2JvWFP2bLpMxzBPg2mfeHnO5SR8DlG0OR0drnv",
+            clientKey: "twhLjKfW6HFTJOGkHFPVZ2SyUPRPwZ5p3fygJObe")
+        
+        setupTabBarController()
         return true
     }
 
@@ -44,19 +47,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    // MARK: - Split view
-
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
-            if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
-                if topAsDetailController.detailItem == nil {
-                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-                    return true
-                }
-            }
-        }
-        return false
+    
+    //MARK: Private Methods
+    
+    /**
+    Setup for initial view controllers at launch
+    
+    */
+    private func setupTabBarController() {
+        let navigationController = self.window!.rootViewController as! UINavigationController
+        let tabBarController = navigationController.topViewController as! UITabBarController
+        let navigationController1 = tabBarController.viewControllers?[0] as! UINavigationController
+        navigationController1.setViewControllers([UIViewController.getSearchViewController()], animated: false)
+        
+        let navigationController2 = tabBarController.viewControllers?[1] as! UINavigationController
+        navigationController2.setViewControllers([UIViewController.getLoginViewController()], animated: false)
     }
 
 }
