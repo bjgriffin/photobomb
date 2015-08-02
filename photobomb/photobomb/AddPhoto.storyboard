@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kBh-4f-j7L">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="5v1-1o-Qqr">
+            <objects>
+                <navigationController id="kBh-4f-j7L" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jFq-bG-hMt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Xei-UE-ZEX" kind="relationship" relationship="rootViewController" id="eRL-ea-CA6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VXX-fn-5Ke" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-164" y="234"/>
+        </scene>
+        <!--Add Photo View Controller-->
+        <scene sceneID="o62-P6-725">
+            <objects>
+                <viewController id="Xei-UE-ZEX" customClass="AddPhotoViewController" customModule="photobomb" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G9i-Ea-G1j"/>
+                        <viewControllerLayoutGuide type="bottom" id="bGK-hc-HEy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pc4-aJ-aJb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WzY-cY-d5q">
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="GHS-q5-RNF"/>
+                                    <constraint firstAttribute="width" constant="600" id="R4t-al-Odo"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mWk-wW-pss">
+                                <rect key="frame" x="0.0" y="364" width="600" height="236"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bGK-hc-HEy" firstAttribute="top" secondItem="mWk-wW-pss" secondAttribute="bottom" id="4gb-LH-3Fk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WzY-cY-d5q" secondAttribute="trailing" constant="-20" id="8dh-MO-JaV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mWk-wW-pss" secondAttribute="trailing" constant="-20" id="OrE-IL-1kB"/>
+                            <constraint firstItem="mWk-wW-pss" firstAttribute="top" secondItem="WzY-cY-d5q" secondAttribute="bottom" id="clz-7J-ZSd"/>
+                            <constraint firstItem="mWk-wW-pss" firstAttribute="leading" secondItem="pc4-aJ-aJb" secondAttribute="leadingMargin" constant="-20" id="n3E-Js-Wyn"/>
+                            <constraint firstItem="WzY-cY-d5q" firstAttribute="top" secondItem="G9i-Ea-G1j" secondAttribute="bottom" id="sV9-zc-IAm"/>
+                            <constraint firstItem="WzY-cY-d5q" firstAttribute="leading" secondItem="pc4-aJ-aJb" secondAttribute="leadingMargin" constant="-20" id="wx0-2D-k9y"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hUZ-j5-Y4b">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Z8T-fA-ag3">
+                            <connections>
+                                <action selector="cancelAction:" destination="Xei-UE-ZEX" id="aNV-S0-IXl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Upload" id="ccM-sC-g5O">
+                            <connections>
+                                <action selector="uploadPhotoAction" destination="Xei-UE-ZEX" id="SmB-0b-lo7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captionTextView" destination="mWk-wW-pss" id="pt4-A4-Zg1"/>
+                        <outlet property="photo" destination="WzY-cY-d5q" id="3T2-kC-uho"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="94h-CN-QAH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="630" y="234"/>
+        </scene>
+    </scenes>
+</document>

@@ -16,6 +16,8 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("addPhotoWillDismiss:"), name: "AddPhotoWillDismiss", object: nil)
+        
         setupSearchController()
         
         tableView.estimatedRowHeight = 50.0
@@ -37,6 +39,7 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
     }
     
     deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "AddPhotoWillDismiss", object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,31 +73,24 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
     // MARK: - UIImagePickerController Delegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
-        WebServiceManager.sharedInstance.savePhoto(image) {
-            error -> Void in
-            if error == nil {
-                CoreDataManager.sharedInstance.deleteCoreDataPhotos() {
-                    WebServiceManager.sharedInstance.fetchPhotos() {
-                        (fetchedResultsController, error) -> Void in
-                        if error == nil {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }
-        }
         picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
+        
+        let addPhotoNavigationViewController = UIViewController.getAddPhotoNavigationViewController()
+        let addPhotoViewController = addPhotoNavigationViewController.viewControllers[0] as! AddPhotoViewController
+        
+        presentViewController(addPhotoNavigationViewController, animated: true, completion: {
+            addPhotoViewController.photo?.image = image
+        })
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    // MARK: - Table view data source
     
+    // MARK: - Table view delegate
+
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
@@ -117,6 +113,12 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
         return 0
     }
 
+    // MARK: - Table view data source
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let fetchedResultsController = fetchedResultsController {
             let info = fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
@@ -139,5 +141,10 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
 
         return cell
     }
-
+    
+    //MARK: NSNotificationCenter Methods
+    
+    func addPhotoWillDismiss(notification:NSNotification) {
+        tableView.reloadData()
+    }
 }

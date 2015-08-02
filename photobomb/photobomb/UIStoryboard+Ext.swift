@@ -15,6 +15,10 @@ extension UIStoryboard {
         return UIStoryboard(name: "Search", bundle: nil)
     }
     
+    class func addPhotoStoryboard() -> UIStoryboard {
+        return UIStoryboard(name:"AddPhoto", bundle:nil)
+    }
+    
     class func loginStoryboard() -> UIStoryboard {
         return UIStoryboard(name:"Login", bundle:nil)
     }

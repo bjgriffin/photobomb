@@ -20,6 +20,8 @@
 		361A410E1B6DC4D10065F8E9 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361A410C1B6DC4D10065F8E9 /* Photo+CoreDataProperties.swift */; };
 		361A410F1B6DC4D10065F8E9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361A410D1B6DC4D10065F8E9 /* Photo.swift */; };
 		361A41111B6DC5480065F8E9 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361A41101B6DC5480065F8E9 /* UIImageView+Ext.swift */; };
+		363C3C911B6EAD0800F1B184 /* AddPhoto.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 363C3C901B6EAD0800F1B184 /* AddPhoto.storyboard */; };
+		363C3C931B6EAD2800F1B184 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C3C921B6EAD2800F1B184 /* AddPhotoViewController.swift */; };
 		36659BEC1B63E064003BE487 /* UIViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36659BEB1B63E064003BE487 /* UIViewController+Camera.swift */; };
 		369A297B1B65F67D00815508 /* SearchTableViewController+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369A297A1B65F67D00815508 /* SearchTableViewController+NSFetchedResultsControllerDelegate.swift */; };
 		36A340A81B6477B700CA5103 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36A340A71B6477B700CA5103 /* Search.storyboard */; };
@@ -73,6 +75,8 @@
 		361A410C1B6DC4D10065F8E9 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "../Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		361A410D1B6DC4D10065F8E9 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = ../Photo.swift; sourceTree = "<group>"; };
 		361A41101B6DC5480065F8E9 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		363C3C901B6EAD0800F1B184 /* AddPhoto.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddPhoto.storyboard; sourceTree = "<group>"; };
+		363C3C921B6EAD2800F1B184 /* AddPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		36659BEB1B63E064003BE487 /* UIViewController+Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Camera.swift"; sourceTree = "<group>"; };
 		369A297A1B65F67D00815508 /* SearchTableViewController+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchTableViewController+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
 		36A340A71B6477B700CA5103 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
@@ -185,6 +189,15 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		363C3C8F1B6EACD900F1B184 /* Add Photo */ = {
+			isa = PBXGroup;
+			children = (
+				363C3C901B6EAD0800F1B184 /* AddPhoto.storyboard */,
+				363C3C921B6EAD2800F1B184 /* AddPhotoViewController.swift */,
+			);
+			name = "Add Photo";
+			sourceTree = "<group>";
+		};
 		36A340AB1B64974000CA5103 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +301,7 @@
 				36ADA3B21B5A903C006F0110 /* Data */,
 				3619C22A1B51A09D00D5B632 /* Login */,
 				3619C2271B519F7F00D5B632 /* Search */,
+				363C3C8F1B6EACD900F1B184 /* Add Photo */,
 				3619C2241B519F0200D5B632 /* Extensions */,
 				A872891A1B312CC2009A8679 /* AppDelegate.swift */,
 				A87289201B312CC2009A8679 /* Main.storyboard */,
@@ -408,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A87289221B312CC2009A8679 /* Main.storyboard in Resources */,
+				363C3C911B6EAD0800F1B184 /* AddPhoto.storyboard in Resources */,
 				36A340B01B6497A400CA5103 /* PhotoDetailTableViewCell.xib in Resources */,
 				A87289271B312CC2009A8679 /* LaunchScreen.xib in Resources */,
 				3619C22C1B51A0B100D5B632 /* Login.storyboard in Resources */,
@@ -447,6 +462,7 @@
 				3619C2261B519F1C00D5B632 /* UIStoryboard+Ext.swift in Sources */,
 				A872891B1B312CC2009A8679 /* AppDelegate.swift in Sources */,
 				3619C22E1B51A32400D5B632 /* UIViewController+Ext.swift in Sources */,
+				363C3C931B6EAD2800F1B184 /* AddPhotoViewController.swift in Sources */,
 				36A340AF1B6497A400CA5103 /* PhotoDetailTableViewCell.swift in Sources */,
 				369A297B1B65F67D00815508 /* SearchTableViewController+NSFetchedResultsControllerDelegate.swift in Sources */,
 				361A410E1B6DC4D10065F8E9 /* Photo+CoreDataProperties.swift in Sources */,

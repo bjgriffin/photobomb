@@ -14,9 +14,15 @@ extension UIViewController {
         let storyboard = UIStoryboard.loginStoryboard()
         return storyboard.instantiateViewControllerWithIdentifier("Login")
     }
+    
+    class func getAddPhotoNavigationViewController() -> UINavigationController {
+        let storyboard = UIStoryboard.addPhotoStoryboard()
+        return storyboard.instantiateInitialViewController() as! UINavigationController
+    }
 
     class func getSearchTableViewController() -> UITableViewController {
         let storyboard = UIStoryboard.searchStoryboard()
         return storyboard.instantiateViewControllerWithIdentifier("Search") as! UITableViewController
     }
+    
 }
