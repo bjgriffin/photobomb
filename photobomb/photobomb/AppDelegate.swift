@@ -17,12 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.enableLocalDatastore()
-        
         // Initialize Parse.
         Parse.setApplicationId("Nq2JvWFP2bLpMxzBPg2mfeHnO5SR8DlG0OR0drnv",
             clientKey: "twhLjKfW6HFTJOGkHFPVZ2SyUPRPwZ5p3fygJObe")
-        
-        setupTabBarController()
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = .whiteColor()
+        navigationBarAppearace.barTintColor = .redColor()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+
         return true
     }
 
@@ -46,22 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    //MARK: Private Methods
-    
-    /**
-    Setup for initial view controllers at launch
-    
-    */
-    private func setupTabBarController() {
-        let navigationController = self.window!.rootViewController as! UINavigationController
-        let tabBarController = navigationController.topViewController as! UITabBarController
-        let navigationController1 = tabBarController.viewControllers?[0] as! UINavigationController
-        navigationController1.setViewControllers([UIViewController.getSearchViewController()], animated: false)
-        
-        let navigationController2 = tabBarController.viewControllers?[1] as! UINavigationController
-        navigationController2.setViewControllers([UIViewController.getLoginViewController()], animated: false)
     }
 
 }

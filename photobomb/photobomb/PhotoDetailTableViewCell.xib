@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoDetailTableViewCell" rowHeight="153" id="KGk-i7-Jjw" customClass="PhotoDetailTableViewCell" customModule="photobomb" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="532" height="153"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="532" height="152.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOS-D1-Nho">
+                        <rect key="frame" x="25" y="24" width="150" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="bdW-kh-E1n"/>
+                            <constraint firstAttribute="height" constant="100" id="rIc-2l-Cxz"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="WOS-D1-Nho" secondAttribute="bottom" constant="16" id="cpd-23-bzS"/>
+                    <constraint firstItem="WOS-D1-Nho" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="gqw-TH-ywm"/>
+                    <constraint firstItem="WOS-D1-Nho" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="jgC-7U-4JW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="photo" destination="WOS-D1-Nho" id="PSn-2i-M0a"/>
+            </connections>
+            <point key="canvasLocation" x="463" y="319.5"/>
+        </tableViewCell>
+    </objects>
+</document>

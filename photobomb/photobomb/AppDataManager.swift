@@ -7,5 +7,11 @@
 //
 
 class AppDataManager {
-
+    class var sharedInstance : AppDataManager {
+        struct Static {
+            static let instance : AppDataManager = AppDataManager()
+        }
+        return Static.instance
+    }
+    
 }

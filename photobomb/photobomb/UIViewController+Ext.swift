@@ -15,8 +15,8 @@ extension UIViewController {
         return storyboard.instantiateViewControllerWithIdentifier("Login")
     }
 
-    class func getSearchViewController() -> UIViewController {
+    class func getSearchTableViewController() -> UITableViewController {
         let storyboard = UIStoryboard.searchStoryboard()
-        return storyboard.instantiateViewControllerWithIdentifier("Search")
+        return storyboard.instantiateViewControllerWithIdentifier("Search") as! UITableViewController
     }
 }
