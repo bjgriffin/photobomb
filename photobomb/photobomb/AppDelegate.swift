@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Bolts
 import Parse
 
 @UIApplicationMain
@@ -24,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         navigationBarAppearace.tintColor = .whiteColor()
         navigationBarAppearace.barTintColor = .redColor()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-
+        
         return true
     }
 

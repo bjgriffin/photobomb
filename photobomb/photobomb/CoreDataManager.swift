@@ -15,6 +15,7 @@ class CoreDataManager {
         }
         return Static.instance
     }
+    
     var photosFetchedResultsController : NSFetchedResultsController?
     
     // MARK: - Core Data Object Methods
@@ -24,9 +25,11 @@ class CoreDataManager {
         fetchRequest.includesPropertyValues = false
         
         do {
-        let photos = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Photo]
-            for photo in photos {
-                managedObjectContext.deleteObject(photo)
+        let photos = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Photo]
+            if let photos = photos {
+                for photo in photos {
+                    managedObjectContext.deleteObject(photo)
+                }
             }
             completion()
         } catch let error {
@@ -40,10 +43,12 @@ class CoreDataManager {
         }
     }
     
-    func savePhoto(imageIdentifier:String, createdAt:NSDate) {
-        let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: managedObjectContext) as! Photo
-        photo.imageIdentifier = imageIdentifier
-        photo.createdAt = createdAt
+    func savePhoto(imageIdentifier:String, createdAt:NSDate, caption:String) {
+        if let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: managedObjectContext) as? Photo {
+            photo.imageIdentifier = imageIdentifier
+            photo.createdAt = createdAt
+            photo.caption = caption
+        }
 
         saveContext()
     }
@@ -60,7 +65,6 @@ class CoreDataManager {
         }
 
         do {
-            print("\(NSThread.currentThread()) ... \(NSThread.mainThread())")
             try photosFetchedResultsController?.performFetch()
         } catch let error {
             print("\(error)")

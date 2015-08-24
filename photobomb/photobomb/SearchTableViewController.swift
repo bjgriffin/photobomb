@@ -15,18 +15,16 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("addPhotoWillDismiss:"), name: "AddPhotoWillDismiss", object: nil)
         
         setupSearchController()
         
         tableView.estimatedRowHeight = 50.0
         tableView.registerNib(UINib(nibName: "PhotoDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "PhotoDetailTableViewCell")
-        tableView.registerNib(UINib(nibName: "SearchHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchHeaderTableViewCell")
         
         //Delete core data photos then fetch photos
         CoreDataManager.sharedInstance.deleteCoreDataPhotos() {
-            WebServiceManager.sharedInstance.fetchPhotos({
+            AppDataManager.sharedInstance.fetchPhotos({
                 (controller, error) -> Void in
                 self.fetchedResultsController = controller
                 self.fetchedResultsController?.delegate = self
@@ -35,6 +33,16 @@ class SearchTableViewController: UITableViewController, UISearchControllerDelega
                     self.tableView.reloadData()
                 }
             })
+        }
+    }
+    
+    @IBAction func drawerAction(sender: AnyObject) {
+        let splitViewContainerController = splitViewController?.parentViewController
+
+        if splitViewController?.traitCollection.horizontalSizeClass == .Compact {
+            splitViewContainerController?.setOverrideTraitCollection(UITraitCollection(horizontalSizeClass: .Regular), forChildViewController: splitViewController!)
+        } else {
+            splitViewContainerController?.setOverrideTraitCollection(UITraitCollection(horizontalSizeClass: .Compact), forChildViewController: splitViewController!)
         }
     }
     

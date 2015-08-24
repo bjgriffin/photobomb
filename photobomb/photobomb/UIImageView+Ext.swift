@@ -17,7 +17,7 @@ extension UIImageView {
         activityIndicator.startAnimating()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let cache = WebServiceManager.sharedInstance.photosCache
+            let cache = AppDataManager.sharedInstance.photosCache
             
             if let img = cache.objectForKey(identifier) as? UIImage {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -25,7 +25,7 @@ extension UIImageView {
                     activityIndicator.stopAnimating()
                 }
             } else {
-                let files = WebServiceManager.sharedInstance.photoPFFiles
+                let files = AppDataManager.sharedInstance.photoPFFiles
                 
                 if let file = files[identifier] {
                     file.getDataInBackgroundWithBlock {

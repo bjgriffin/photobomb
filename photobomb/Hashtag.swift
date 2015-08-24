@@ -1,5 +1,5 @@
 //
-//  Photo.swift
+//  Hashtag.swift
 //  photobomb
 //
 //  Created by BJ Griffin on 8/9/15.
@@ -9,8 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Photo)
-class Photo: NSManagedObject {
+class Hashtag: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

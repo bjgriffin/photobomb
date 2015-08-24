@@ -11,8 +11,6 @@ import Parse
 import CoreData
 
 class WebServiceManager {
-    lazy var photosCache = NSCache()
-    lazy var photoPFFiles = [String:PFFile]()
     
     class var sharedInstance : WebServiceManager {
         struct Static {
@@ -21,17 +19,40 @@ class WebServiceManager {
         return Static.instance
     }
     
+    //MARK: Private Methods
+    private func createHashtagPFObjectArray(hashtagStrings:[String], photo:PFObject) -> [PFObject] {
+        var hashtagObjects = [PFObject]()
+        for tag in hashtagStrings {
+            let hashtag = PFObject(className: "Hashtag")
+            hashtag["tag"] = tag
+            hashtag["photo"] = photo
+            
+            hashtag.saveInBackgroundWithBlock({(success, error) -> Void in
+                if !success {
+                    if let error = error {
+                        print(error)
+                    }
+                }
+            })
+            
+            hashtagObjects.append(hashtag)
+        }
+        
+        return hashtagObjects
+    }
+    
     //MARK: Create Methods
     
-    func savePhoto(image:UIImage, completion:(error:NSError?) -> ()) {
+    func savePhoto(image:UIImage, caption:String, hashtags:[String], completion:(error:NSError?) -> ()) {
         let photo = PFObject(className: "Photo")
         
         if let data = UIImageJPEGRepresentation(image, 0.5) {
             let imageFile = PFFile(data:data)
             photo["image"] = imageFile
+            photo["caption"] = caption
+            photo["hashtags"] = createHashtagPFObjectArray(hashtags, photo:photo)
             photo["imageIdentifier"] = NSUUID().UUIDString
-        
-            photo.saveInBackgroundWithBlock({(success:Bool, error:NSError?) -> Void in
+            photo.saveInBackgroundWithBlock({(success, error) -> Void in
                 if !success {
                     if let error = error {
                         print(error)
@@ -84,31 +105,6 @@ class WebServiceManager {
                 print(error)
             }
         }
-    }
-    
-    func fetchPhotos(completion:(fetchedResultsController:NSFetchedResultsController?, error:NSError?) -> Void) {
-        let query = PFQuery(className: "Photo")
-        //TODO: Add query to limit number of fetched photos
-        
-        query.findObjectsInBackgroundWithBlock ({(objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
-                for photo in objects as! [PFObject] {
-                    let imageFile = photo["image"] as! PFFile
-                    let identifier = photo["imageIdentifier"] as! String
-                    
-                    self.photoPFFiles[identifier] = imageFile
-                    
-                    CoreDataManager.sharedInstance.savePhoto(identifier, createdAt: photo.createdAt ?? NSDate())
-                }
-                
-                let fetchedResultsController = CoreDataManager.sharedInstance.fetchPhotos()
-                completion(fetchedResultsController: fetchedResultsController, error: nil)
-            } else {
-                print("Error in retrieving \(error)")
-                completion(fetchedResultsController: nil, error: error)
-            }
-            
-        })
     }
     
     func fetchComments() {

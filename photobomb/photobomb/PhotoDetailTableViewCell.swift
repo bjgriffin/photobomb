@@ -10,6 +10,8 @@ import UIKit
 
 class PhotoDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var hashtagsLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="1.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8166.2" systemVersion="14E46" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="1.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8175.2" systemVersion="14E46" minimumToolsVersion="Xcode 7.0">
     <entity name="Comment" representedClassName="Comment" syncable="YES">
         <attribute name="postDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="syncStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -7,7 +7,7 @@
         <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="comments" inverseEntity="Photo" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="comments" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Hashtag" syncable="YES">
+    <entity name="Hashtag" representedClassName=".Hashtag" syncable="YES">
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="hashtags" inverseEntity="Photo" syncable="YES"/>
     </entity>
@@ -15,6 +15,7 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="location" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="imageIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="syncStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -36,7 +37,7 @@
         <element name="Comment" positionX="-18" positionY="27" width="128" height="120"/>
         <element name="Hashtag" positionX="-45" positionY="54" width="128" height="75"/>
         <element name="Location" positionX="-36" positionY="9" width="128" height="60"/>
-        <element name="Photo" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Photo" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="User" positionX="-54" positionY="0" width="128" height="150"/>
     </elements>
 </model>

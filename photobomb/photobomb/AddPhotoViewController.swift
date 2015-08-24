@@ -14,8 +14,18 @@ class AddPhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     @IBAction func cancelAction(sender: AnyObject) {
@@ -24,11 +34,11 @@ class AddPhotoViewController: UIViewController {
     
     @IBAction func uploadPhotoAction() {
         if let image = photo.image {
-            WebServiceManager.sharedInstance.savePhoto(image) {
+            WebServiceManager.sharedInstance.savePhoto(image, caption:captionTextView.text, hashtags:getHashtags()) {
                 error -> Void in
                 if error == nil {
                     CoreDataManager.sharedInstance.deleteCoreDataPhotos() {
-                        WebServiceManager.sharedInstance.fetchPhotos() {
+                        AppDataManager.sharedInstance.fetchPhotos() {
                             (fetchedResultsController, error) -> Void in
                             if error == nil {
                                 dispatch_async(dispatch_get_main_queue()) {
@@ -46,6 +56,65 @@ class AddPhotoViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    private func getHashtags() -> [String] {
+        let words = captionTextView.text.characters.split {$0 == " "}.map { String($0) }
+        var hashtags = [String]()
+        
+         for word in words {
+                 if word.hasPrefix("#") {
+                        let digits = NSCharacterSet.decimalDigitCharacterSet()
+        
+                        if let _ = word.rangeOfCharacterFromSet(digits) {
+                                // hashtag contains a number, like "#1"
+                                    // so don't make it clickable
+                            } else {
+                                hashtags.append(word)
+                            }
+                        
+                    }
+            }
+        
+        return hashtags
+    }
+    
+    private func moveKeyboard(moved:Bool, keyboardHeight:CGFloat) {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.3)
+        
+        if moved {
+            view.frame.origin.y -= keyboardHeight
+            view.frame.size.height += keyboardHeight
+        } else {
+            view.frame.origin.y += keyboardHeight
+            view.frame.size.height -= keyboardHeight
+        }
+        
+        UIView.commitAnimations()
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        let keyboardHeight = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue.size.height
+        if view.frame.origin.y >= 0 {
+            moveKeyboard(true, keyboardHeight: keyboardHeight!)
+        } else if view.frame.origin.y < 0 {
+            moveKeyboard(false, keyboardHeight: keyboardHeight!)
+        }
+    }
+    
+    func keyboardWillHide(notification:NSNotification) {
+        let keyboardHeight = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey]?.CGRectValue.size.height
+        
+        if view.frame.origin.y >= 0 {
+            moveKeyboard(true, keyboardHeight: keyboardHeight!)
+        } else if view.frame.origin.y < 0 {
+            moveKeyboard(false, keyboardHeight: keyboardHeight!)
+        }
     }
 
 }

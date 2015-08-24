@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  photobomb
 //
-//  Created by BJ Griffin on 8/1/15.
+//  Created by BJ Griffin on 8/9/15.
 //  Copyright © 2015 mojo. All rights reserved.
 //
 //  Delete this file and regenerate it using "Create NSManagedObject Subclass…"
@@ -15,8 +15,9 @@ import CoreData
 extension Photo {
 
     @NSManaged var createdAt: NSDate?
-    @NSManaged var syncStatus: NSNumber?
     @NSManaged var imageIdentifier: String?
+    @NSManaged var syncStatus: NSNumber?
+    @NSManaged var caption: String?
     @NSManaged var comments: NSSet?
     @NSManaged var hashtags: NSSet?
     @NSManaged var location: Location?
